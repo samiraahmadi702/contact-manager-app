@@ -31,11 +31,11 @@ const ViewContact = () => {
             }
 
         };
-        fetchContactData()
+        fetchContactData().then()
     }, [])
     return (
         <>
-            <section className="view-contact-intro p3">
+            <section className="p3">
                 <div className="container">
                     <div className="row my-2 text-center">
                         <p className="h3 fw-bold" style={{color: CYAN}}>
@@ -52,12 +52,12 @@ const ViewContact = () => {
             ) : (
                 <>
                     {Object.keys(localContact).length > 0 && (
-                        <section className="view-contact mt-e">
+                        <section>
                             <div
                                 className="container p-2"
                                 style={{borderRadius: "1em", backgroundColor: CURRENTLINE}}
                             >
-                                <div className="row align-items-center">
+                                <div className="row align-items-center mt-5 mx-5">
                                     <div className="col-md-3">
                                         <img
                                             src={localContact.contact.photo}
