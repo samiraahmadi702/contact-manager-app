@@ -1,0 +1,42 @@
+{
+  "contacts": [
+    {
+      "fullName": "name 1",
+      "photo": "https://via.placeholder.com/200",
+      "mobile": "87868080",
+      "job": "programmer",
+      "group": "1",
+      "id": "1"
+    },
+    {
+      "fullName": "name 2",
+      "photo": "https://via.placeholder.com/200",
+      "mobile": "93247434",
+      "job": "programmer",
+      "group": "2",
+      "id": "2"
+    }
+  ],
+  "groups": [
+    {
+      "id": "1",
+      "name": " colleague"
+    },
+    {
+      "id": "2",
+      "name": " friend"
+    },
+    {
+      "id": "3",
+      "name": " family"
+    },
+    {
+      "id": "4",
+      "name": " service"
+    },
+    {
+      "id": "5",
+      "name": "familiar"
+    }
+  ]
+}
