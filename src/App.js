@@ -1,13 +1,13 @@
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {Route, Routes, Navigate} from 'react-router-dom';
+import {Route, Routes, Navigate, useNavigate} from 'react-router-dom';
 import Contacts from "./components/Contact/Contacts";
 import AddContact from "./components/Contact/AddContact";
 import ViewContact from "./components/Contact/ViewContact";
 import EditContact from "./components/Contact/EditContact";
 import {useEffect, useState} from "react";
 import {contactContext} from "./context/contactContext";
-import {getAllContacts, getAllGroups} from "./services/contactService";
+import {createContact, getAllContacts, getAllGroups} from "./services/contactService";
 
 function App() {
     const [loading, setLoading] = useState(false);
@@ -16,6 +16,8 @@ function App() {
     const [allGroups, setAllGroups] = useState([]);
     const [filteredContacts, setFilteredContacts] = useState([]);
     const [contactQuery, setContactQuery] = useState({text: ""});
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,7 +37,7 @@ function App() {
                 console.log(err.message);
             }
         }
-        fetchData()
+        fetchData().then()
     }, [])
 
     const searchContact = (event) => {
@@ -49,7 +51,28 @@ function App() {
         setFilteredContacts(contacts)
 
     }
+    const onCreateContact = async (event) => {
+        event.preventDefault();
+        try {
+            const {status, data} = await createContact(contact);
 
+            if (status === 201) {
+                const contacts = [...allContacts, data];
+                setAllContacts(contacts);
+                setFilteredContacts(contacts);
+                setContact({})
+                navigate("/contacts");
+            }
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+    const onContactChange = (event) => {
+        setContact({
+            ...contact,
+            [event.target.name]: event.target.value
+        })
+    }
     return (
         <contactContext.Provider
             value={{
@@ -65,7 +88,9 @@ function App() {
                 setFilteredContacts,
                 contactQuery,
                 setContactQuery,
-                searchContact
+                searchContact,
+                onCreateContact,
+                onContactChange
             }}>
             <div className="App">
                 <Navbar/>

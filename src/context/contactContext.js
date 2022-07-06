@@ -20,6 +20,10 @@ export const contactContext = createContext({
     setContactQuery: () => {
     },
     searchContact: () => {
+    },
+    onCreateContact: () => {
+    },
+    onContactChange: () => {
     }
 
 })
