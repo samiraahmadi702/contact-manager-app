@@ -4,9 +4,10 @@ import Spinner from "../Spinner";
 import Contact from "./Contact";
 import {useContext} from "react";
 import {contactContext} from "../../context/contactContext";
+import deleteContact from "./DeleteContact";
 
 const Contacts = () => {
-    const {loading, filteredContacts} = useContext(contactContext);
+    const {loading, filteredContacts, onDeleteContactConfirm} = useContext(contactContext);
     return (
         <>
             <section className="container">
@@ -35,6 +36,9 @@ const Contacts = () => {
                                         <Contact
                                             key={c.id}
                                             contact={c}
+                                            onDeleteContactConfirm={() => {
+                                                onDeleteContactConfirm(c.id, c.fullName)
+                                            }}
                                         />
                                     ))
                                 ) : (

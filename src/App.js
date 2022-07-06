@@ -7,7 +7,9 @@ import ViewContact from "./components/Contact/ViewContact";
 import EditContact from "./components/Contact/EditContact";
 import {useEffect, useState} from "react";
 import {contactContext} from "./context/contactContext";
-import {createContact, getAllContacts, getAllGroups} from "./services/contactService";
+import {createContact, deleteContact, getAllContacts, getAllGroups} from "./services/contactService";
+import {confirmAlert} from "react-confirm-alert";
+import {COMMENT, CURRENTLINE, FOREGROUND, PURPLE, YELLOW} from "./helpers/colors";
 
 function App() {
     const [loading, setLoading] = useState(false);
@@ -73,6 +75,67 @@ function App() {
             [event.target.name]: event.target.value
         })
     }
+    const onDeleteContactConfirm = (contactId, contactFullname) => {
+        confirmAlert({
+            customUI: ({onClose}) => {
+                return (
+                    <div
+                        dir="rtl"
+                        style={{
+                            backgroundColor: CURRENTLINE,
+                            border: `1px solid ${PURPLE}`,
+                            borderRadius: "1em",
+                        }}
+                        className="p-4"
+                    >
+                        <h1 style={{color: YELLOW}}>پاک کردن مخاطب</h1>
+                        <p style={{color: FOREGROUND}}>
+                            مطمئنی که میخوای مخاطب {contactFullname} رو پاک کنی ؟
+                        </p>
+                        <button
+                            onClick={() => {
+                                removeContact(contactId);
+                                onClose();
+                            }}
+                            className="btn mx-2"
+                            style={{backgroundColor: PURPLE}}
+                        >
+                            مطمئن هستم
+                        </button>
+                        <button
+                            onClick={onClose}
+                            className="btn"
+                            style={{backgroundColor: COMMENT}}
+                        >
+                            انصراف
+                        </button>
+                    </div>
+                );
+            },
+        });
+    }
+    const removeContact = async (contactId) => {
+
+        const contacts = [...allContacts];
+        try {
+            const updatedContact = allContacts.filter((c) => c.id !== contactId);
+            setAllContacts(updatedContact);
+            setFilteredContacts(updatedContact);
+
+            const {status} = await deleteContact(contactId);
+
+            if (status !== 200) {
+                setAllContacts(contacts);
+                setFilteredContacts(contacts);
+            }
+        } catch (err) {
+            console.log(err.message);
+
+            setAllContacts(contacts);
+            setFilteredContacts(contacts);
+        }
+    };
+
     return (
         <contactContext.Provider
             value={{
@@ -90,7 +153,8 @@ function App() {
                 setContactQuery,
                 searchContact,
                 onCreateContact,
-                onContactChange
+                onContactChange,
+                onDeleteContactConfirm
             }}>
             <div className="App">
                 <Navbar/>

@@ -32,7 +32,7 @@ export const updateContact = (contactInfo, contactId) => {
 
 export const deleteContact = (contactId) => {
     const url = `${baseUrl}/contacts/${contactId}`;
-    return axios.delete(contactId);
+    return axios.delete(url);
 }
 
 export const getAllGroups = () => {

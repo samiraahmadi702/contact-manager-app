@@ -2,7 +2,7 @@ import './Contact.css'
 import {CURRENTLINE, CYAN, ORANGE, RED} from "../../helpers/colors";
 import {Link} from "react-router-dom";
 
-const Contact = ({contact}) => {
+const Contact = ({contact, onDeleteContactConfirm}) => {
     return (
         <>
             <div className="col-md-6">
@@ -39,7 +39,9 @@ const Contact = ({contact}) => {
                                       style={{backgroundColor: CYAN}}>
                                     <i className="fa fa-pen"></i>
                                 </Link>
-                                <button className="btn my-1" style={{backgroundColor: RED}}>
+                                <button className="btn my-1"
+                                        onClick={onDeleteContactConfirm}
+                                        style={{backgroundColor: RED}}>
                                     <i className="fa fa-trash"></i>
                                 </button>
                             </div>

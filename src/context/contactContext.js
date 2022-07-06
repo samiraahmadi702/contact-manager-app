@@ -24,6 +24,8 @@ export const contactContext = createContext({
     onCreateContact: () => {
     },
     onContactChange: () => {
+    },
+    ondeleteContactConfirm: () => {
     }
 
 })
