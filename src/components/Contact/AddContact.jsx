@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import data from "bootstrap/js/src/dom/data";
 
 const AddContact = () => {
-    const {allGroups, onCreateContact, contact, onContactChange} = useContext(contactContext);
+    const {allGroups, onCreateContact, onContactChange} = useContext(contactContext);
     return (
         <>
             <div className="container" style={{justifyContent: "center"}}>
@@ -22,7 +22,6 @@ const AddContact = () => {
                                 <input
                                     name="fullName"
                                     type="text"
-                                    value={contact.fullName}
                                     onChange={onContactChange}
                                     className="form-control"
                                     placeholder="Full Name"
@@ -33,7 +32,6 @@ const AddContact = () => {
                                 <input
                                     name="photo"
                                     type="text"
-                                    value={contact.photo}
                                     onChange={onContactChange}
                                     className="form-control"
                                     required={true}
@@ -44,7 +42,6 @@ const AddContact = () => {
                                 <input
                                     name="mobile"
                                     type="number"
-                                    value={contact.mobile}
                                     onChange={onContactChange}
                                     className="form-control"
                                     required={true}
@@ -55,7 +52,6 @@ const AddContact = () => {
                                 <input
                                     type="email"
                                     name="email"
-                                    value={contact.email}
                                     onChange={onContactChange}
                                     className="form-control"
                                     required={true}
@@ -66,7 +62,6 @@ const AddContact = () => {
                                 <input
                                     type="text"
                                     name="job"
-                                    value={contact.job}
                                     onChange={onContactChange}
                                     className="form-control"
                                     required={true}
@@ -76,7 +71,6 @@ const AddContact = () => {
                             <div className="mb-2">
                                 <select
                                     name="group"
-                                    value={contact.group}
                                     onChange={onContactChange}
                                     required={true}
                                     className="form-control"

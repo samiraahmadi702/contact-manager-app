@@ -35,7 +35,7 @@ const Contact = ({contact}) => {
                                       style={{backgroundColor: ORANGE}}>
                                     <i className="fa fa-eye"></i>
                                 </Link>
-                                <Link to={"/contacts/"} className="btn my-1"
+                                <Link to={`/contacts/edit/${contact.id}`} className="btn my-1"
                                       style={{backgroundColor: CYAN}}>
                                     <i className="fa fa-pen"></i>
                                 </Link>
